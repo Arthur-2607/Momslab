@@ -1,3 +1,4 @@
+import { Suspense } from "react"
 import { CompletePageClient } from "./complete-client"
 
 interface CompletePageProps {
@@ -6,5 +7,9 @@ interface CompletePageProps {
 
 export default async function CompletePage({ params }: CompletePageProps) {
   const { branchSlug } = await params
-  return <CompletePageClient branchSlug={branchSlug} />
+  return (
+    <Suspense fallback={<div className="flex items-center justify-center min-h-screen">Loading...</div>}>
+      <CompletePageClient branchSlug={branchSlug} />
+    </Suspense>
+  )
 }

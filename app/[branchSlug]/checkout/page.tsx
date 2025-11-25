@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation"
+import { Suspense } from "react"
 import { CheckoutClient } from "./checkout-client"
 import { getBranchBySlug } from "@/lib/server"
 
@@ -19,5 +20,9 @@ export default async function CheckoutPage({ params }: CheckoutPageProps) {
     notFound()
   }
 
-  return <CheckoutClient branchSlug={branchSlug} branch={branchResult.branch} />
+  return (
+    <Suspense fallback={<div className="flex items-center justify-center min-h-screen">Loading...</div>}>
+      <CheckoutClient branchSlug={branchSlug} branch={branchResult.branch} />
+    </Suspense>
+  )
 }

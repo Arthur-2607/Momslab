@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, Suspense } from "react"
 import { useParams, useSearchParams } from 'next/navigation'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -10,7 +10,7 @@ import { signIn, signInWithKakao } from "@/app/actions/auth"
 import { UserPlus } from 'lucide-react'
 import { useToast } from "@/hooks/use-toast"
 
-export default function BranchLoginPage() {
+function BranchLoginPageContent() {
   const params = useParams()
   const searchParams = useSearchParams()
   const [isLoading, setIsLoading] = useState(false)
@@ -194,5 +194,17 @@ export default function BranchLoginPage() {
         </CardContent>
       </Card>
     </div>
+  )
+}
+
+export default function BranchLoginPage() {
+  return (
+    <Suspense fallback={
+      <div className="flex min-h-screen items-center justify-center">
+        <div className="text-center">Loading...</div>
+      </div>
+    }>
+      <BranchLoginPageContent />
+    </Suspense>
   )
 }
