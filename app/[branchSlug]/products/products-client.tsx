@@ -214,7 +214,9 @@ export default function ProductsPageClient({ branchSlug, branch, initialProducts
   const branchColor = getBranchColor(branchId)
 
   // Debug logging
-  console.log('[ProductsClient] Initial products count:', initialProducts)
+  console.log('[ProductsClient] Initial products count:', initialProducts.length)
+  console.log('[ProductsClient] Branch ID:', branchId)
+  console.log('[ProductsClient] First product:', initialProducts[0])
 
   // Filter products for this branch (safety check even though server filtered)
   const branchProducts = useMemo(() => {
