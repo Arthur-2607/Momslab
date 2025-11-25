@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, Suspense } from "react"
 import { useParams, useSearchParams } from 'next/navigation'
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
@@ -12,7 +12,7 @@ import { getBranchBySlug } from "@/lib/server"
 import type { Branch } from "@/lib/server"
 import { useToast } from "@/hooks/use-toast"
 
-export default function SignupPage() {
+function SignupPageContent() {
   const params = useParams()
   const searchParams = useSearchParams()
   const branchSlug = params.branchSlug as string
